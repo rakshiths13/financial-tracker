@@ -1,0 +1,33 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+ ✓ Ready in 1710ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 10.6s (682 modules)
+ GET /robots.txt 404 in 10954ms
+ ✓ Compiled in 315ms (302 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 5.1s (1699 modules)
+ GET / 200 in 5810ms
+ GET /robots.txt 404 in 33ms
+ ○ Compiling /login ...
+ ✓ Compiled /login in 1075ms (1731 modules)
+ GET /login 200 in 1240ms
+ GET /login 200 in 103ms
+ ○ Compiling /signup ...
+ ✓ Compiled /signup in 1374ms (1247 modules)
+ GET /login 200 in 198ms
+ ○ Compiling / ...
+ ✓ Compiled / in 585ms (925 modules)
+ ○ Compiling /wishlist ...
+ ✓ Compiled /wishlist in 868ms (1750 modules)
