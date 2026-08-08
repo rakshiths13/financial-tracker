@@ -1,41 +1,70 @@
 # Personal Finance Tracker
 
-A local-first personal finance web app designed with an India-friendly focus (INR, DD/MM/YYYY dates).
-This app allows you to upload PDF bank statements, parse and normalize them, store them in a local MySQL database, view interactive spending charts, use a savings calculator, and maintain a future-plans wishlist.
+A robust, full-stack personal finance application that allows users to track spending, monitor income, and manage manual and automated transactions via PDF bank statement uploads.
+
+## Features
+
+- **Automated Statement Parsing**: Upload PDF bank statements to automatically extract and categorize transactions.
+- **Advanced Analytics & KPIs**: Interactive dashboards with breakdown by category, bank, and transfer types.
+- **Strict Income Logic**: Separates pure income from generic credits and transfers.
+- **Manual Transactions**: Seamlessly add cash or manual transactions to supplement bank data.
+- **Transfer Reclassification**: Total control over categorizing transactions as internal, possible, incoming, or outgoing transfers.
+- **Export**: Export clean, structured data for external reporting.
 
 ## Tech Stack
-- **Frontend**: Next.js 14+ (App Router), React 18, TypeScript, TailwindCSS, Recharts, Framer Motion, Axios, React Hook Form, Zod, react-hot-toast, lucide-react.
-- **Backend**: Python 3.11+, FastAPI, Uvicorn, SQLAlchemy 2.0 async, aiomysql, Pydantic v2, pydantic-settings, Alembic, python-jose, passlib[bcrypt], python-multipart, pdfplumber, camelot-py[cv].
-- **Database**: MySQL 8.0 local.
+
+- **Frontend**: Next.js (React), Tailwind CSS, Framer Motion, Recharts, Lucide Icons.
+- **Backend**: FastAPI (Python), SQLAlchemy, SQLite, PyMuPDF.
 
 ## Setup Instructions
 
-### Prerequisites
-- Python 3.11+
-- Node.js 18+
-- MySQL 8.0
-- Ghostscript (required for camelot-py PDF parsing fallback)
-  - Ubuntu/Debian: `sudo apt-get install ghostscript`
-  - macOS: `brew install ghostscript`
-  - Windows: Download from the official site.
+### 1. Backend Setup
 
-### Database Setup
-Ensure you have a local MySQL 8.0 server running.
-Create a database named `personal_finance` and a user with access to it.
+```bash
+cd backend
+python -m venv venv
+# Windows
+.\venv\Scripts\activate
+# Mac/Linux
+source venv/bin/activate
 
-### Backend Setup
-1. `cd backend`
-2. `python -m venv venv`
-3. `source venv/bin/activate` (or `venv\Scripts\activate` on Windows)
-4. `pip install -r requirements.txt`
-5. Copy `.env.example` to `.env` and fill in your database credentials.
-6. Run migrations: `alembic upgrade head`
-7. Start the server: `uvicorn app.main:app --reload --host 127.0.0.1 --port 8000`
+pip install -r requirements.txt
+```
 
-### Frontend Setup
-1. `cd frontend`
-2. `npm install`
-3. Start the dev server: `npm run dev`
+Environment Setup:
+Create a `.env` file in the `backend/` directory:
+```env
+SECRET_KEY=your_super_secret_key_here
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=1440
+DATABASE_URL=sqlite+aiosqlite:///./finance.db
+```
 
-The frontend will be available at `http://localhost:3000`.
-The backend API and docs will be available at `http://127.0.0.1:8000/docs`.
+Run the backend:
+```bash
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+```
+API Documentation will be available at `http://127.0.0.1:8000/docs`.
+
+### 2. Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+Environment Setup:
+Create a `.env.local` file in the `frontend/` directory:
+```env
+NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
+```
+
+Run the frontend:
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:3000`.
+
+## Known Limitations
+- Counterparty resolution currently relies on regex heuristics without direct banking API integrations.
+- PDF extraction heuristics are optimized for specific standard Indian bank statement formats (e.g., HDFC, SBI, ICICI). 
